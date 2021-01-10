@@ -9,7 +9,7 @@
 //
 //
 //      Example Code for ESP32 Dev Module
-//      Require LovyanGFX 0.3.4 Library
+//      Require LovyanGFX 0.3.6 Library
 //
 //
 // ####################  LCD Pin Assignments  ####################
@@ -107,19 +107,23 @@ void setup() {
 
   buf.setColorDepth(16);
   buf.createSprite(640, 48);
-
+  buf.setSwapBytes(true);
 }
 
 
 // ===== MAIN SUSHI LOOP ===== //
 void loop() {
-  buf.pushImage(i - 50, 0, 48, 48, sushi);
-  buf.pushImage(i + 50, 0, 48, 48, sushi);
-  buf.pushImage(i + 150, 0, 48, 48, sushi);
-  buf.pushImage(i + 250, 0, 48, 48, sushi);
-  buf.pushImage(i + 350, 0, 48, 48, sushi);
-  buf.pushImage(i + 450, 0, 48, 48, sushi);
-  buf.pushImage(i + 550, 0, 48, 48, sushi);
+  for (int j = 0; j < 7; j++)
+  {
+    buf.pushImage(i - 50 + j * 100, 0, 48, 48, sushi);
+
+// rolling sushi.
+//  buf.pushImageRotateZoom(i - 25 + j * 100, 24, 24, 24, i + j * 100, 1.0f, 1.0f, 48, 48, sushi);
+
+// zooming sushi.
+//  buf.pushImageRotateZoom(i - 20 + j * 100, 24, 24, 24, 0, 0.5f + ((float)i/100 + j)/5, 0.5f + ((float)i/100 + j)/5, 48, 48, sushi);
+  }
+
   lcd_buffer_write();
   i++;
   if (i == 100) {
@@ -132,7 +136,7 @@ void loop() {
 // ===== 640*48px Buffer to 320*96px LCD ===== //
 inline void lcd_buffer_write() {
   lcd.setAddrWindow(0, 0, 320, 96);
-  lcd.pushPixels((uint16_t*)buf.getBuffer(), 640 * 48, true);
+  lcd.pushPixels((lgfx::swap565_t*)buf.getBuffer(), 640 * 48);
 }
 
 
