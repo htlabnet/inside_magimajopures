@@ -72,9 +72,9 @@ uint16_t i = 0;
 
 // ===== ENTER SUSHI SHOP ===== //
 void setup() {
-  panel.freq_write = 20000000;
-  panel.freq_fill  = 27000000;
-  panel.freq_read  = 16000000;
+// 設定できるクロックは20MHz～6.7MHzです。また、80MHzを整数で割った値に調整されます。
+// 20MHz, 16MHz, 13.4MHz, 11.5MHz, 10MHz, 88.9MHz, 8MHz, 7.3MHz, 6.7MHz
+  panel.freq_write = 16000000;
   panel.len_dummy_read_pixel = 8;
 
   panel.spi_cs = 33;  //to LCD CS(15)
