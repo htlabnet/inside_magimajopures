@@ -27,10 +27,10 @@
 //  9   - D5    [to ESP32 - 16]
 //  10  - D6    [to ESP32 - 27]
 //  11  - D7    [to ESP32 - 14]
-//  12  - GND   [to GND]
+//  12  - CS 1  [to ESP32 - 33]
 //  13  - RD    [to ESP32 - 2]
 //  14  - WR    [to ESP32 - 4]
-//  15  - CS    [to ESP32 - 33]
+//  15  - CS 2  [to ESP32 - 33]
 //  16  - DC    [to ESP32 - 15]
 //  17  - TE    [OPEN]
 //  18  - VDD   [to 3.3V]
@@ -39,7 +39,7 @@
 //  21  - LED-  [to GND]
 //  22  - GND   [to GND]
 //
-
+// ※ PSRAMを使用する場合は GPIO 16 , 17 は使用できないので注意。
 
 #include <LovyanGFX.hpp>
 
